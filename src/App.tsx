@@ -17,6 +17,11 @@ import {
   CardTitle,
 } from "./components/ui/card";
 import { toast } from "sonner";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Download, Video, Flame, Globe } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import LastCommit from "./components/LastCommit";
@@ -88,13 +93,6 @@ function App() {
               <p className="subtext">Productivity, Reimagined</p>
             </div>
             <div className="hero-button-container">
-              <a href="https://github.com/infinotiver/lockin/releases">
-                <Button size="lg" className="rounded-full">
-                  <Video size={24} />
-                  Original Idea
-                </Button>
-              </a>
-
               <a
                 href="https://github.com/infinotiver/lockin"
                 target="_blank"
@@ -148,6 +146,21 @@ function App() {
             </AccordionItem>
           ))}
         </Accordion>
+        <div className="py-4">
+          <HoverCard>
+            <HoverCardTrigger>
+              <a href="https://drive.google.com/file/d/1RVRQkxvHRdjDiMVh6f-chMGd9UahmM0c/view?usp=sharing">
+                <Button size="lg" variant="outline">
+                  <Video size={24} />
+                  Original Pitch Video
+                </Button>
+              </a>
+            </HoverCardTrigger>
+            <HoverCardContent side="bottom">
+              i don't want you to watch it. the video is horrible.
+            </HoverCardContent>
+          </HoverCard>
+        </div>
       </section>
 
       <footer className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-foreground/10 px-4 sm:px-6 py-8">
