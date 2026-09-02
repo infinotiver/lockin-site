@@ -8,8 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Toaster } from "@/components/ui/sonner";
-import { toast } from "sonner";
+import { toast, Toaster } from "@/components/ui/toast";
 import { Download, Flame, Globe } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import LastCommit from "./components/LastCommit";
@@ -59,6 +58,7 @@ const faqs = [
 function App() {
   return (
     <>
+      <Toaster />
       <div className="page">
         <div className="hero-container">
           <DotGrid
@@ -94,18 +94,31 @@ function App() {
                 </Button>
               </a>
 
-              <a href="https://github.com/infinotiver/lockin/releases">
-                <Button
-                  size="lg"
-                  className="rounded-full"
-                  onClick={() =>
-                    toast.success("Redirecting to GitHub Releases")
-                  }
-                >
-                  <Download />
-                  Download for Android
-                </Button>
-              </a>
+              <Button
+                size="lg"
+                className="rounded-full"
+                onClick={() =>
+                  toast.add({
+                    type: "warning",
+                    title: "LockIn is in Beta",
+                    description:
+                      "You may encounter bugs or incomplete features.",
+                    actionProps: {
+                      children: "Continue",
+                      onClick: () => {
+                        window.open(
+                          "https://github.com/infinotiver/lockin/releases",
+                          "_blank",
+                          "noopener,noreferrer",
+                        );
+                      },
+                    },
+                  })
+                }
+              >
+                <Download />
+                Download for Android
+              </Button>
             </div>
           </div>
         </div>
@@ -141,8 +154,6 @@ function App() {
           </div>
         </footer>
       </div>
-
-      <Toaster />
     </>
   );
 }
