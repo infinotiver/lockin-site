@@ -9,20 +9,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Toaster } from "@/components/ui/sonner";
-import {
-  Card,
-  CardAction,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./components/ui/card";
 import { toast } from "sonner";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Download, Video, Flame, Globe } from "lucide-react";
+import { Download, Flame, Globe } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import LastCommit from "./components/LastCommit";
 
@@ -71,7 +59,7 @@ const faqs = [
 function App() {
   return (
     <>
-      <div className="px-4 sm:px-6">
+      <div className="page">
         <div className="hero-container">
           <DotGrid
             dotSize={5}
@@ -87,11 +75,13 @@ function App() {
             returnDuration={1.5}
             style={{ position: "absolute", zIndex: -1 }}
           />
+
           <div className="hero-text-container">
             <div>
               <h1 className="hero">LockIn</h1>
               <p className="subtext">Productivity, Reimagined</p>
             </div>
+
             <div className="hero-button-container">
               <a
                 href="https://github.com/infinotiver/lockin"
@@ -103,73 +93,54 @@ function App() {
                   Github
                 </Button>
               </a>
+
+              <a href="https://github.com/infinotiver/lockin/releases">
+                <Button
+                  size="lg"
+                  className="rounded-full"
+                  onClick={() =>
+                    toast.success("Redirecting to GitHub Releases")
+                  }
+                >
+                  <Download />
+                  Download for Android
+                </Button>
+              </a>
             </div>
           </div>
         </div>
+
+        <main>
+          <section className="faq-section">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">
+              Frequently asked questions
+            </h2>
+
+            <Accordion>
+              {faqs.map((item, i) => (
+                <AccordionItem key={i} value={`item-${i}`}>
+                  <AccordionTrigger>{item.q}</AccordionTrigger>
+                  <AccordionContent>{item.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </section>
+        </main>
+
+        <footer className="site-footer">
+          <span className="footer-copy">
+            © 2026 LockIn{" "}
+            <Badge variant="secondary" className="ml-1">
+              Beta
+            </Badge>
+          </span>
+
+          <div className="footer-links">
+            <LastCommit repo="infinotiver/lockin" icon={Flame} />
+            <LastCommit repo="infinotiver/lockin-site" icon={Globe} />
+          </div>
+        </footer>
       </div>
-
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
-        <Card className="border-foreground/10 bg-card">
-          <CardHeader>
-            <CardTitle className="text-2xl">Downloads</CardTitle>
-            <CardAction>
-              <div className="flex items-center gap-2">
-                <Badge variant="default" className="text-sm px-3 py-1">
-                  Beta
-                </Badge>
-              </div>
-            </CardAction>
-          </CardHeader>
-          <CardFooter>
-            <a href="https://github.com/infinotiver/lockin/releases">
-              <Button
-                size="lg"
-                onClick={() => toast.success("Redirecting to GitHub Releases")}
-              >
-                <Download />
-                (Beta) Download for Android
-              </Button>
-            </a>
-          </CardFooter>
-        </Card>
-      </section>
-
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
-        <h2 className="text-2xl font-semibold text-foreground mb-6">
-          Frequently asked questions
-        </h2>
-        <Accordion>
-          {faqs.map((item, i) => (
-            <AccordionItem key={i} value={`item-${i}`}>
-              <AccordionTrigger>{item.q}</AccordionTrigger>
-              <AccordionContent>{item.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-        <div className="py-4">
-          <HoverCard>
-            <HoverCardTrigger>
-              <a href="https://drive.google.com/file/d/1RVRQkxvHRdjDiMVh6f-chMGd9UahmM0c/view?usp=sharing">
-                <Button size="lg" variant="outline">
-                  <Video size={24} />
-                  Original Pitch Video
-                </Button>
-              </a>
-            </HoverCardTrigger>
-            <HoverCardContent side="bottom">
-              i don't want you to watch it. the video is horrible.
-            </HoverCardContent>
-          </HoverCard>
-        </div>
-      </section>
-
-      <footer className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-foreground/10 px-4 sm:px-6 py-8">
-        <span className="text-sm text-foreground/50">© 2026 LockIn</span>
-        <div className="flex flex-col gap-1.5 items-center sm:items-end">
-          <LastCommit repo="infinotiver/lockin" icon={Flame} />
-          <LastCommit repo="infinotiver/lockin-site" icon={Globe} />
-        </div>
-      </footer>
 
       <Toaster />
     </>
