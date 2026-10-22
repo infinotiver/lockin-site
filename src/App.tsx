@@ -9,14 +9,41 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast, Toaster } from "@/components/ui/toast";
-import { Download, Flame, Globe } from "lucide-react";
+import { Flame, Globe, Smartphone, Users, Wallet, Apple } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import LastCommit from "./components/LastCommit";
+
+const roadmap = [
+  {
+    icon: Smartphone,
+    title: "Android beta",
+    status: "In progress",
+    desc: "Stake on screen-time goals, tracked on-device.",
+  },
+  {
+    icon: Wallet,
+    title: "Real stakes",
+    status: "Exploring",
+    desc: "Real consequences for missed goals, without the usual payment mess.",
+  },
+  {
+    icon: Users,
+    title: "Group stakes",
+    status: "Planned",
+    desc: "Lock in with friends and keep each other honest.",
+  },
+  {
+    icon: Apple,
+    title: "iOS",
+    status: "Planned",
+    desc: "Same app, on iPhone.",
+  },
+];
 
 const faqs = [
   {
     q: "How does staking work?",
-    a: "Set a goal and back it with money. Stay under it, keep your money. Go over, and your stake goes to charity.",
+    a: "Set a goal and back it with a stake. Stay under it, keep your stake. Go over, and you lose it.",
   },
   {
     q: "How is my screen time tracked?",
@@ -30,7 +57,7 @@ const faqs = [
     q: "Who made this?",
     a: (
       <>
-        LockIn is mostly built by{" "}
+        LockIn is built by{" "}
         <a
           href="https://github.com/infinotiver"
           target="_blank"
@@ -38,9 +65,8 @@ const faqs = [
           className="text-foreground underline underline-offset-2 hover:text-foreground/80"
         >
           Infino
-        </a>
-        , handling the app, design system, and native Android layer, with
-        backend support from{" "}
+        </a>{" "}
+        (app, design system, native Android layer) and{" "}
         <a
           href="https://github.com/tanishworks"
           target="_blank"
@@ -48,8 +74,8 @@ const faqs = [
           className="text-foreground underline underline-offset-2 hover:text-foreground/80"
         >
           Crucible
-        </a>
-        .
+        </a>{" "}
+        (backend).
       </>
     ),
   },
@@ -78,8 +104,13 @@ function App() {
 
           <div className="hero-text-container">
             <div>
+              <Badge variant="secondary" className="mb-4">
+                Coming soon
+              </Badge>
               <h1 className="hero">LockIn</h1>
-              <p className="subtext">Productivity, Reimagined</p>
+              <p className="subtext">
+                Put something on the line. Actually stick to your goals.
+              </p>
             </div>
 
             <div className="hero-button-container">
@@ -88,13 +119,14 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="secondary" size="lg" className="rounded-full">
+                <Button size="lg" className="rounded-full">
                   <FaGithub size={24} />
-                  Github
+                  Follow on Github
                 </Button>
               </a>
 
               <Button
+                variant="secondary"
                 size="lg"
                 className="rounded-full"
                 onClick={() =>
@@ -116,14 +148,37 @@ function App() {
                   })
                 }
               >
-                <Download />
-                Download for Android
+                Try the Android beta
               </Button>
             </div>
           </div>
         </div>
 
         <main>
+          <section className="faq-section">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">
+              What's coming
+            </h2>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {roadmap.map(({ icon: Icon, title, status, desc }) => (
+                <div
+                  key={title}
+                  className="rounded-2xl bg-card p-5 flex flex-col gap-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <Icon className="size-5 text-foreground" />
+                    <Badge variant="secondary">{status}</Badge>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">{title}</h3>
+                    <p className="text-sm text-muted-foreground">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           <section className="faq-section">
             <h2 className="text-2xl font-semibold text-foreground mb-6">
               Frequently asked questions

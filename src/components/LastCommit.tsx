@@ -41,7 +41,7 @@ export default function LastCommit({ repo, icon: Icon }: LastCommitProps) {
         </AvatarFallback>
       </Avatar>
       <code>{commit.sha.slice(0, 7)}</code>
-      <span className="truncate max-w-[40ch]">
+      <span className="truncate max-w-[32ch]">
         {commit.commit.message.split("\n")[0]}
       </span>
     </a>
